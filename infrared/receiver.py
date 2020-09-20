@@ -2,6 +2,7 @@
 # GPIO for the IR receiver: 23
 # GPIO for the IR transmitter: 22
 from ircodec.command import CommandSet
+import time
 
 controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote', name='SamsungTV')
 
@@ -41,6 +42,8 @@ commands = [
 for command in commands:
     print(command)
     controller.add(command)
+    print('Got it.')
+    time.sleep(1)
 # Connected to pigpio
 # Detecting IR command...
 # Received.
