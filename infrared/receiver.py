@@ -3,7 +3,7 @@
 # GPIO for the IR transmitter: 22
 from ircodec.command import CommandSet
 
-controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote')
+controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote', name='SamsungTV')
 
 power = 'power'
 volume_up = 'volume_up'
