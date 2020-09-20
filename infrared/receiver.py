@@ -39,6 +39,7 @@ commands = [
 
 # Add the volume up key
 for command in commands:
+    print(command)
     controller.add(command)
 # Connected to pigpio
 # Detecting IR command...
