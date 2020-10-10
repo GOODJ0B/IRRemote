@@ -1,26 +1,29 @@
 import flask
 from ircodec.command import CommandSet
-import json
-
-with open('commands.json') as json_file:
-    commands = json.load(json_file)
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 controller = CommandSet.load('samsung-tv.json')
 
-@app.route('/send-command', methods=['GET'])
-def home():
-    command = request.args.get("command")
-    controller.emit(command)
 
-@app.route('/add-command', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
-    command = request.args.get("command")
-    commands.append(command)
-    with open('commands.json', 'w') as outfile:
-        json.dump(commands, outfile)
+    return 'Online.\r\nGo to /send-command/command or /receive-command/command.'
+
+
+@app.route('/send-command/<command>', methods=['GET'])
+def sendCommand(command):
+    print('=> sending command: ' + command)
+    controller.emit(command)
+    return 'command send';
+
+
+@app.route('/receive-command/<command>', methods=['GET'])
+def receiveCommand(command):
+    print('=> receiving command: ' + command)
+    controller.add(command)
+    return 'command send';
 
 
 app.run()
