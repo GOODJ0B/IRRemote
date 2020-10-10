@@ -1,5 +1,6 @@
 import flask
 from ircodec.command import CommandSet
+import RPi.GPIO as GPIO
 
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
@@ -8,6 +9,7 @@ app = flask.Flask(__name__)
 
 controller = CommandSet.load('samsung-tv.json')
 
+GPIO.setmode(GPIO.BCM)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -18,7 +20,9 @@ def home():
 def sendCommand(command):
     print('=> sending command: ' + command)
     controller.emit(command)
-    return 'command send';
+    GPIO.setup(22, GPIO.OUT)
+    GPIO.output(22, False)
+    return 'command send'
 
 
 @app.route('/update/<command>', methods=['GET'])
