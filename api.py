@@ -1,6 +1,5 @@
 import flask
 from ircodec.command import CommandSet
-import RPi.GPIO as GPIO
 
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
