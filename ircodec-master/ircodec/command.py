@@ -60,6 +60,7 @@ class Command(object):
             Gap in seconds
 
         """
+        print('emitting!')
         # Create wave
         pi = pigpio.pi()
         pi.set_mode(emitter_gpio, pigpio.OUTPUT)
