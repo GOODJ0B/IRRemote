@@ -9,7 +9,6 @@ app = flask.Flask(__name__)
 
 controller = CommandSet.load('samsung-tv.json')
 
-GPIO.setmode(GPIO.BCM)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -20,8 +19,6 @@ def home():
 def sendCommand(command):
     print('=> sending command: ' + command)
     controller.emit(command)
-    GPIO.setup(22, GPIO.OUT)
-    GPIO.output(22, False)
     return 'command send'
 
 
