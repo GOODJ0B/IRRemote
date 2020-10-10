@@ -1,0 +1,11 @@
+<div *ngIf="irRemoteService.controller" class="card-container">
+  <div *ngFor="let command of irRemoteService.commands">
+    <a class="circle-link" [title]="command.name" (click)="irRemoteService.sendCommand(command)">
+      <i [class]="command.icon"></i>
+    </a>
+</div>
+</div>
+<div *ngIf="!irRemoteService.controller">
+  Backend lijkt uit te staan.
+</div>
+

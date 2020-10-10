@@ -9,10 +9,11 @@ import {IrRemoteService} from '../services/ir-remote-service';
 export class AppComponent implements OnInit {
   title = 'IRRemote';
 
+
   constructor(public readonly irRemoteService: IrRemoteService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.irRemoteService.updateController();
   }
 }

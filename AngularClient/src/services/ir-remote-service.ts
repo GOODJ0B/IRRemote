@@ -1,6 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Controller} from '../reference/reference';
 import {Injectable} from '@angular/core';
+import { CommandInformation } from '../reference/command-information';
+import { icons } from '../reference/icons';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,7 @@ export class IrRemoteService {
 
   public url = 'http://192.168.0.185:5000';
   public controller: Controller;
-  public commands: string[];
+  public commands: CommandInformation[];
 
   constructor(private readonly  httpClient: HttpClient) {
   }
@@ -21,7 +23,8 @@ export class IrRemoteService {
         console.log(controller);
         this.commands = [];
         for (const key in controller.commands) {
-          this.commands.push(controller.commands[key].name);
+          const icon = icons[controller.commands[key].name] ?? 'fa fa-question-circle';
+          this.commands.push({name: controller.commands[key].name, icon} as CommandInformation);
         }
       });
   }
