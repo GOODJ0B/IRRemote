@@ -18,18 +18,32 @@ export class IrRemoteService {
 
   public updateController(): void {
     this.httpClient.get<Controller>(this.url + '/get')
-      .subscribe(controller => {
-        this.controller = controller;
-        console.log(controller);
-        this.commands = [];
-        for (const key in controller.commands) {
-          const icon = icons[controller.commands[key].name] ?? 'fa fa-question-circle';
-          this.commands.push({name: controller.commands[key].name, icon} as CommandInformation);
-        }
-      });
+      .subscribe(this.updateCommands.bind(this));
   }
 
   public sendCommand(command: string): void {
     this.httpClient.get<string>(this.url + '/send/' + command).subscribe();
+  }
+
+  public addCommand(command: string): void {
+    this.httpClient.get<Controller>(this.url + '/add/' + command).subscribe(this.updateCommands.bind(this));
+  }
+
+  public updateCommand(command: string): void {
+    this.httpClient.get<Controller>(this.url + '/update/' + command).subscribe(this.updateCommands.bind(this));
+  }
+
+  public removeCommand(command: string): void {
+    this.httpClient.get<Controller>(this.url + '/remove/' + command).subscribe(this.updateCommands.bind(this));
+  }
+
+  private updateCommands(controller: Controller): void {
+      this.controller = controller;
+      console.log(controller);
+      this.commands = [];
+      for (const key in controller.commands) {
+        const icon = icons[controller.commands[key].name] ?? 'fa fa-question-circle';
+        this.commands.push({name: controller.commands[key].name, icon} as CommandInformation);
+      }
   }
 }
