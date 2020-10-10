@@ -4,9 +4,9 @@ from ircodec.command import CommandSet
 app = flask.Flask(__name__)
 # app.config["DEBUG"] = True
 
-controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote', name='SamsungTV')
-#
-# controller = CommandSet.load('samsung-tv.json')
+# controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote', name='SamsungTV')
+
+controller = CommandSet.load('samsung-tv.json')
 
 
 @app.route('/', methods=['GET'])
