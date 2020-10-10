@@ -23,7 +23,8 @@ def sendCommand(command):
 def receiveCommand(command):
     print('=> receiving command: ' + command)
     controller.add(command)
-    return 'command send';
+    controller.save_as('samsung-tv.json')
+    return 'command received';
 
 
 app.run(host='0.0.0.0')
