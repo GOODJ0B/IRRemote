@@ -26,4 +26,4 @@ def receiveCommand(command):
     return 'command send';
 
 
-app.run(host= '0.0.0.0')
+app.run(host='0.0.0.0')
