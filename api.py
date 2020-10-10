@@ -2,7 +2,7 @@ import flask
 from ircodec.command import CommandSet
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
 
 controller = CommandSet.load('samsung-tv.json')
 
