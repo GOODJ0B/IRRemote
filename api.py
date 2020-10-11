@@ -1,14 +1,22 @@
 import flask
 from flask_cors import CORS
 from ircodec.command import CommandSet
+import pickle
+import json
+
+from command import Command
 
 app = flask.Flask(__name__)
 CORS(app)
 # app.config["DEBUG"] = True
 
+# to create a new controller:
 # controller = CommandSet(emitter_gpio=22, receiver_gpio=23, description='TV remote', name='SamsungTV')
 
 controller = CommandSet.load('samsung-tv.json')
+commands = []
+with open("commands.txt", "rb") as fp:
+    commands = pickle.load(fp)
 
 
 @app.route('/', methods=['GET'])
@@ -23,35 +31,65 @@ def sendCommand(command):
     return 'command send'
 
 
-@app.route('/update/<command>', methods=['GET'])
-def updateCommand(command):
-    print('=> updating command: ' + command)
-    controller.remove(command)
-    controller.add(command)
+@app.route('/update/<name>', methods=['GET'])
+def updateCommand(name):
+    print('=> updating command: ' + name)
+
+    controller.remove(name)
+    controller.add(name)
     controller.save_as('samsung-tv.json')
-    return controller.to_json()
+
+    return getCommandsJson()
+
+@app.route('/update/<location>/<icon>/<name>', methods=['GET'])
+def updateCommandIconLocaton(name, icon, location):
+    print('=> updating command icon and location: ' + name)
+
+    for command in commands:
+        if (command.name == name):
+            command.icon = icon
+            command.location = location
+
+    return getCommandsJson()
 
 
-@app.route('/add/<command>', methods=['GET'])
-def addCommand(command):
-    print('=> adding command: ' + command)
-    controller.add(command)
+@app.route('/add/<location>/<icon>/<name>', methods=['GET'])
+def addCommand(name, icon, location):
+    print('=> adding command: ' + name)
+
+    controller.add(name)
     controller.save_as('samsung-tv.json')
-    return controller.to_json()
+
+    commands.append(Command(name, icon, location))
+    saveCommands()
+
+    return getCommandsJson()
 
 
-@app.route('/remove/<command>', methods=['GET'])
-def removeCommand(command):
-    print('=> removing command: ' + command)
-    controller.remove(command)
+@app.route('/remove/<name>', methods=['GET'])
+def removeCommand(name):
+    print('=> removing command: ' + name)
+
+    controller.remove(name)
     controller.save_as('samsung-tv.json')
-    return controller.to_json()
+
+    global commands
+    commands = [command for command in commands if command.name != name]
+
+    return getCommandsJson()
 
 
 @app.route('/get', methods=['GET'])
-def getController():
-    print('=> sending controller')
-    return controller.to_json()
+def getCommands():
+    print('=> sending commands')
+    return getCommandsJson()
 
+
+def saveCommands():
+    with open('commands.txt', 'wb') as file:
+        pickle.dump(commands, file)
+
+def getCommandsJson():
+    return json.dumps(commands, default=lambda obj: obj.__dict__)
 
 app.run(host='0.0.0.0')
