@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   public title = 'IR Remote';
   public deleting = false;
 
-
   constructor(public readonly irRemoteService: IrRemoteService) {
   }
 
@@ -22,6 +21,7 @@ export class AppComponent implements OnInit {
     if (this.deleting) {
       if (confirm(commandName + ' verwijderen?')){
         this.irRemoteService.removeCommand(commandName);
+        this.deleting = false;
       }
     } else {
       this.irRemoteService.sendCommand(commandName);
@@ -36,7 +36,11 @@ export class AppComponent implements OnInit {
     const name = prompt('Voer een naam in:', '');
 
     if (name) {
-      this.irRemoteService.addCommand(name);
+      const icon = prompt('Voer een icon in (zie fontawesome.com):', '');
+
+      if (icon) {
+        this.irRemoteService.addCommand(name, icon, 4);
+      }
     }
   }
 }

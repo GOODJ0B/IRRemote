@@ -1,10 +1,12 @@
-<div *ngIf="irRemoteService.controller">
-  <div class="card-container">
-    <div *ngFor="let command of irRemoteService.commands">
-      <a class="circle-link" [title]="command.name" [class.red]="deleting" (click)="commandClickedHandler(command.name)">
-        <i [class]="command.icon" [class.red]="deleting"></i>
-      </a>
-    </div>
+<div *ngIf="irRemoteService.commands && !irRemoteService.isReceiving" style="display: flex">
+
+  <a *ngFor="let command of irRemoteService.commands; index as i"
+     class="circle-link" [title]="command.name" [class.red]="deleting"
+     (click)="commandClickedHandler(command.name)">
+    <i [class]="'fa ' + command.icon" [class.red]="deleting"></i>
+  </a>
+
+  <div>
     <div>
       <a class="circle-link bottom" style="right: 20px" title="add" (click)="addCommand()">
         <i class="fa fa-plus"></i>
@@ -17,7 +19,10 @@
     </div>
   </div>
 </div>
-<div *ngIf="!irRemoteService.controller">
+<div *ngIf="irRemoteService.isReceiving" style="color: white">
+  Listening...
+</div>
+<div *ngIf="!irRemoteService.commands">
   Backend lijkt uit te staan.
 </div>
 
