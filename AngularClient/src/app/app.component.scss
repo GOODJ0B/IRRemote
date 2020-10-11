@@ -1,3 +1,12 @@
+.hide {
+  background-color: black !important;
+  border: 1px solid black !important;
+}
+
+.adding {
+  background-color: gray !important;
+  border: 1px solid gray !important;
+}
 
 .bottom {
   position: absolute;
@@ -20,7 +29,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: 1s ease-out;
 }

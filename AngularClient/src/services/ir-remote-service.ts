@@ -20,7 +20,7 @@ export class IrRemoteService {
   }
 
   public sendCommand(command: string): void {
-    this.httpClient.get<string>(this.url + '/send/' + command).subscribe();
+    this.httpClient.get(this.url + '/send/' + command).subscribe();
   }
 
   public addCommand(name: string, icon: string, location: number): void {
@@ -38,6 +38,20 @@ export class IrRemoteService {
 
   private updateCommands(commands: Command[]): void {
     this.isReceiving = false;
-    this.commands = commands;
+    this.commands = [];
+    for (let i = 0; i < 40; i++) {
+      this.commands[i] = {
+        name: 'Toevoegen',
+        icon: 'fa-plus',
+        location: i,
+        isAddAction: true
+      } as Command;
+    }
+
+    commands.forEach(command => {
+      this.commands[command.location] = command;
+    });
+
+    console.log(this.commands);
   }
 }
