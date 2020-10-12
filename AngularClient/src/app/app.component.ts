@@ -25,16 +25,19 @@ export class AppComponent implements OnInit {
       if (!this.adding) {
         return;
       }
-        this.addCommand(command.location);
+      this.addCommand(command.location);
+      return;
     }
+
     if (this.deleting) {
       if (confirm(command.name + ' verwijderen?')){
         this.irRemoteService.removeCommand(command.name);
         this.deleting = false;
       }
-    } else {
-      this.irRemoteService.sendCommand(command.name);
+      return;
     }
+
+    this.irRemoteService.sendCommand(command.name);
   }
 
   public startDeleting(): void {
