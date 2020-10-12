@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 })
 export class IrRemoteService {
 
-  public url = 'http://192.168.0.185:5000';
+  public url = 'http://192.168.0.40:5000';
   public commands: Command[];
   public isReceiving = false;
 
