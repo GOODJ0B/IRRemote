@@ -1,7 +1,24 @@
-pip install pigpio
+(voor raspbian lite)
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install git
+sudo apt-get install python3-pip
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
 
-pip install ircodec
-OR
-git clone git@github.com:kentwait/ircodec.git
-cd ircodec
-python setup.py install
+git clone http://github.com/GOODJ0B/IRRemote
+
+cd IRRemote
+
+sudo pip3 install pigpio
+sudo pip3 install flask
+sudo pip3 install flask_cors
+sudo pip3 install ircodec
+
+cd AngularClient
+
+sudo npm install -g @angular/cli
+npm install
+ng build --prod
+
+sudo apt-get install apache2
+sudo nano /etc/apache2/sites-available/default
