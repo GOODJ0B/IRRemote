@@ -21,4 +21,14 @@ npm install
 ng build --prod
 
 sudo apt-get install apache2
-sudo nano /etc/apache2/sites-available/default
+sudo nano /etc/apache2/sites-available/000-default.conf
+ --> verander /var/www/html in /home/pi/IRRemote/AngularClient/dist/IRRemote
+sudo nano /etc/apache2/apache2.conf
+ --> zelfde verhaal (zoek naar 
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>)
+
+evt: maak een static ip adres
