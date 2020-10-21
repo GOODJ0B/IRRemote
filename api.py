@@ -28,7 +28,7 @@ def home():
 def sendCommand(command):
     print('=> sending command: ' + command)
     controller.emit(command)
-    return
+    return 'command send'
 
 
 @app.route('/update/<name>', methods=['PUT'])
