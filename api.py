@@ -24,14 +24,14 @@ def home():
     return 'Online.\r\nGo to /send/ /update/ /add/ /remove/ or /get/'
 
 
-@app.route('/send/<command>', methods=['GET'])
+@app.route('/send/<command>', methods=['PUT'])
 def sendCommand(command):
     print('=> sending command: ' + command)
     controller.emit(command)
     return
 
 
-@app.route('/update/<name>', methods=['GET'])
+@app.route('/update/<name>', methods=['PUT'])
 def updateCommand(name):
     print('=> updating command: ' + name)
 
@@ -41,7 +41,7 @@ def updateCommand(name):
 
     return getCommandsJson()
 
-@app.route('/update/<location>/<icon>/<name>', methods=['GET'])
+@app.route('/update/<location>/<icon>/<name>', methods=['PUT'])
 def updateCommandIconLocaton(name, icon, location):
     print('=> updating command icon and location: ' + name)
 
@@ -53,7 +53,7 @@ def updateCommandIconLocaton(name, icon, location):
     return getCommandsJson()
 
 
-@app.route('/add/<location>/<icon>/<name>', methods=['GET'])
+@app.route('/add/<location>/<icon>/<name>', methods=['POST'])
 def addCommand(name, icon, location):
     print('=> adding command: ' + name)
 
@@ -66,7 +66,7 @@ def addCommand(name, icon, location):
     return getCommandsJson()
 
 
-@app.route('/remove/<name>', methods=['GET'])
+@app.route('/remove/<name>', methods=['DELETE'])
 def removeCommand(name):
     print('=> removing command: ' + name)
 
