@@ -34,20 +34,20 @@ export class IrRemoteService {
   }
 
   public sendCommand(command: string): void {
-    this.httpClient.get(this.url + '/send/' + command).subscribe();
+    this.httpClient.put(this.url + '/send/' + command, null).subscribe();
   }
 
   public addCommand(name: string, icon: string, location: number): void {
     this.isReceiving = true;
-    this.httpClient.get<Command[]>(this.url + '/add/' + location + '/' + icon  + '/' + name).subscribe(this.updateCommands.bind(this));
+    this.httpClient.post<Command[]>(this.url + '/add/' + location + '/' + icon  + '/' + name, null).subscribe(this.updateCommands.bind(this));
   }
 
   public updateCommand(name: string, icon: string, location: number): void {
-    this.httpClient.get<Command[]>(this.url + '/update/' + location + '/' + icon  + '/' + name).subscribe(this.updateCommands.bind(this));
+    this.httpClient.put<Command[]>(this.url + '/update/' + location + '/' + icon  + '/' + name, null).subscribe(this.updateCommands.bind(this));
   }
 
   public removeCommand(name: string): void {
-    this.httpClient.get<Command[]>(this.url + '/remove/' + name).subscribe(this.updateCommands.bind(this));
+    this.httpClient.delete<Command[]>(this.url + '/remove/' + name).subscribe(this.updateCommands.bind(this));
   }
 
   private updateCommands(commands: Command[]): void {
