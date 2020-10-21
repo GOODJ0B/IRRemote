@@ -7,11 +7,25 @@ import {Injectable} from '@angular/core';
 })
 export class IrRemoteService {
 
-  public url = 'http://192.168.0.40:5000';
+  public url: string;
+  private port = 5000;
   public commands: Command[];
   public isReceiving = false;
 
   constructor(private readonly  httpClient: HttpClient) {
+    let url = window.location.href;
+    // remove '/' from end
+    url = url.substr(0, url.length - 1);
+
+    // remove port number if exists
+    for (let i = 'http://'.length; i < url.length; i++) {
+      if (url[i] === ':') {
+        url = url.substr(0, i);
+      }
+    }
+
+    // add port number of backend
+    this.url = url + ':' + this.port;
   }
 
   public updateController(): void {
