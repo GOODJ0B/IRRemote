@@ -6,9 +6,6 @@ sudo apt-get install python3-pip
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 
-sudo nano /etc/rc.local
- --> voeg 'sudo pigpiod' toe voor exit 0
-
 git clone http://github.com/GOODJ0B/IRRemote
 
 cd IRRemote
@@ -35,4 +32,8 @@ sudo nano /etc/apache2/apache2.conf
     Require all granted
 </Directory>)
 
+sudo nano /etc/rc.local
+ --> voeg 'sudo pigpiod' en 'sh /home/pi/IRRemote/run.sh &' toe voor exit 0
+
 evt: maak een static ip adres
+
