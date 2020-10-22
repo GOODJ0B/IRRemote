@@ -3,8 +3,26 @@ from flask_cors import CORS
 from ircodec.command import CommandSet
 import pickle
 import json
+import time
+from rpi_rf import RFDevice
 
 from command import Command
+
+rfRetries = 10
+
+rfCodesOn = [8373588,
+             8376660,
+             8377428,
+             8377620,
+             8377668]
+
+rfCodesOff = [8373585,
+              8376657,
+              8377425,
+              8377617,
+              8377665]
+
+rfGpioPort = 17
 
 app = flask.Flask(__name__)
 CORS(app)
@@ -31,6 +49,29 @@ def sendCommand(command):
     return 'command send'
 
 
+@app.route('/everythingOff', methods=['PUT'])
+def everythingOff(command):
+    print('=> sending command: ' + command)
+    controller.emit('power')
+    for code in rfCodesOff:
+        sendRfCommand(code)
+    return 'command send'
+
+
+@app.route('/send-rf-on/<command>', methods=['PUT'])
+def sendRfOnCommand(command):
+    print('=> sending rf on command: ' + command)
+    sendRfCommand(rfCodesOn[command])
+    return 'rf on command send'
+
+
+@app.route('/send-rf-off/<command>', methods=['PUT'])
+def sendRfOffCommand(command):
+    print('=> sending rf off command: ' + command)
+    sendRfCommand(rfCodesOff[command])
+    return 'rf off command send'
+
+
 @app.route('/update/<name>', methods=['PUT'])
 def updateCommand(name):
     print('=> updating command: ' + name)
@@ -40,6 +81,7 @@ def updateCommand(name):
     controller.save_as('samsung-tv.json')
 
     return getCommandsJson()
+
 
 @app.route('/update/<location>/<icon>/<name>', methods=['PUT'])
 def updateCommandIconLocaton(name, icon, location):
@@ -85,11 +127,22 @@ def getCommands():
     return getCommandsJson()
 
 
+def sendRfCommand(code):
+    rfDevice = RFDevice(17)
+    rfDevice.enable_tx()
+    for i in range(rfRetries):
+        rfDevice.tx_code(code, 1, 188, 24)
+        time.sleep(0.1)
+    rfDevice.cleanup()
+
+
 def saveCommands():
     with open('commands.txt', 'wb') as file:
         pickle.dump(commands, file)
 
+
 def getCommandsJson():
     return json.dumps(commands, default=lambda obj: obj.__dict__)
+
 
 app.run(host='0.0.0.0')
