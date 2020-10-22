@@ -61,14 +61,14 @@ def everythingOff(command):
 @app.route('/send-rf-on/<command>', methods=['PUT'])
 def sendRfOnCommand(command):
     print('=> sending rf on command: ' + command)
-    sendRfCommand(rfCodesOn[command])
+    sendRfCommand(rfCodesOn[int(command)])
     return 'rf on command send'
 
 
 @app.route('/send-rf-off/<command>', methods=['PUT'])
 def sendRfOffCommand(command):
     print('=> sending rf off command: ' + command)
-    sendRfCommand(rfCodesOff[command])
+    sendRfCommand(rfCodesOff[int(command)])
     return 'rf off command send'
 
 
