@@ -39,11 +39,13 @@ export class IrRemoteService {
 
   public addCommand(name: string, icon: string, location: number): void {
     this.isReceiving = true;
-    this.httpClient.post<Command[]>(this.url + '/add/' + location + '/' + icon  + '/' + name, null).subscribe(this.updateCommands.bind(this));
+    this.httpClient.post<Command[]>(this.url + '/add/' + location + '/' + icon  + '/' + name, null)
+      .subscribe(this.updateCommands.bind(this));
   }
 
   public updateCommand(name: string, icon: string, location: number): void {
-    this.httpClient.put<Command[]>(this.url + '/update/' + location + '/' + icon  + '/' + name, null).subscribe(this.updateCommands.bind(this));
+    this.httpClient.put<Command[]>(this.url + '/update/' + location + '/' + icon  + '/' + name, null)
+      .subscribe(this.updateCommands.bind(this));
   }
 
   public removeCommand(name: string): void {
