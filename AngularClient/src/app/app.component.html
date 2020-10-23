@@ -1,5 +1,33 @@
 <div *ngIf="irRemoteService.commands && !irRemoteService.isReceiving">
 
+  <div *ngFor="let rowIndex of rfRowIndexes" class="row ml-2">
+    <a class="circle-link"
+       [class.hide]="!rfRemoteService.commands[rowIndex].isVisible"
+       (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex])">
+      <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex].icon"></i>
+    </a>
+    <a class="circle-link"
+       [class.hide]="!rfRemoteService.commands[rowIndex + 1].isVisible"
+       (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 1])">
+      <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 1].icon"></i>
+    </a>
+    <a class="circle-link"
+       [class.hide]="!rfRemoteService.commands[rowIndex + 2].isVisible"
+       (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 2])">
+      <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 2].icon"></i>
+    </a>
+    <a class="circle-link"
+       [class.hide]="!rfRemoteService.commands[rowIndex + 3].isVisible"
+       (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 3])">
+      <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 3].icon"></i>
+    </a>
+    <a class="circle-link"
+       [class.hide]="!rfRemoteService.commands[rowIndex + 4].isVisible"
+       (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 4])">
+      <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 4].icon"></i>
+    </a>
+  </div>
+
   <div *ngFor="let rowIndex of rowIndexes" class="row ml-2">
     <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex].isAddAction"
