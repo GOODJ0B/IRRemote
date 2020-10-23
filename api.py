@@ -8,7 +8,7 @@ from rpi_rf import RFDevice
 
 from command import Command
 
-rfRetries = 10
+rfRetries = 5
 
 rfCodesOn = [8373588,
              8376660,
@@ -46,30 +46,37 @@ def home():
 def sendCommand(command):
     print('=> sending command: ' + command)
     controller.emit(command)
-    return 'command send'
+    return '{ "success":"true" }'
 
 
 @app.route('/everythingOff', methods=['PUT'])
-def everythingOff(command):
-    print('=> sending command: ' + command)
-    controller.emit('power')
+def everythingOff():
+    print('=> sending everything off')
     for code in rfCodesOff:
         sendRfCommand(code)
-    return 'command send'
+    return '{ "success":"true" }'
+
+
+@app.route('/everythingOn', methods=['PUT'])
+def everythingOn():
+    print('=> sending everything on')
+    sendRfCommand(rfCodesOn[0])
+    sendRfCommand(rfCodesOn[1])
+    return '{ "success":"true" }'
 
 
 @app.route('/send-rf-on/<command>', methods=['PUT'])
 def sendRfOnCommand(command):
     print('=> sending rf on command: ' + command)
     sendRfCommand(rfCodesOn[int(command)])
-    return 'rf on command send'
+    return '{ "success":"true" }'
 
 
 @app.route('/send-rf-off/<command>', methods=['PUT'])
 def sendRfOffCommand(command):
     print('=> sending rf off command: ' + command)
     sendRfCommand(rfCodesOff[int(command)])
-    return 'rf off command send'
+    return '{ "success":"true" }'
 
 
 @app.route('/update/<name>', methods=['PUT'])
@@ -126,15 +133,14 @@ def getCommands():
     print('=> sending commands')
     return getCommandsJson()
 
+rfDevice = RFDevice(17)
+rfDevice.enable_tx()
 
 def sendRfCommand(code):
-    rfDevice = RFDevice(17)
-    rfDevice.enable_tx()
     for i in range(rfRetries):
         rfDevice.tx_code(code, 1, 188, 24)
-        time.sleep(0.1)
-    rfDevice.cleanup()
-
+        time.sleep(0.03)
+   
 
 def saveCommands():
     with open('commands.txt', 'wb') as file:
