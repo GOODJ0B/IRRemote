@@ -4,3 +4,12 @@ export interface Command {
   location: number;
   isAddAction: boolean;
 }
+
+export interface RfCommand {
+  name: string;
+  icon: string;
+  location: number;
+  index: number;
+  isOn: boolean;
+  isVisible: boolean;
+}

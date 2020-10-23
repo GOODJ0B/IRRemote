@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IrRemoteService} from '../services/ir-remote-service';
-import {Command} from '../reference/reference';
+import {Command, RfCommand} from '../reference/reference';
+import {RfRemoteService} from '../services/rf-remote-service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ import {Command} from '../reference/reference';
 export class AppComponent implements OnInit {
   public title = 'IR Remote';
   public deleting = false;
-  public rowIndexes = [0, 5, 10, 15, 20, 25, 30, 35];
+  public rowIndexes = [10, 15, 20, 25, 30, 35];
+  public rfRowIndexes = [0, 5];
   public adding = false;
 
-  constructor(public readonly irRemoteService: IrRemoteService) {
+  constructor(public readonly irRemoteService: IrRemoteService,
+              public readonly rfRemoteService: RfRemoteService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +41,10 @@ export class AppComponent implements OnInit {
     }
 
     this.irRemoteService.sendCommand(command.name);
+  }
+
+  public rfCommandClickedHandler(command: RfCommand): void {
+    this.rfRemoteService.sendRfCommand(command);
   }
 
   public startDeleting(): void {
