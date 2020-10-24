@@ -26,7 +26,6 @@ export class IrRemoteService {
 
     // add port number of backend
     this.url = url + ':' + this.port;
-    this.url = 'http://192.168.0.40:5000';
   }
 
   public updateController(): void {
