@@ -61,16 +61,18 @@
     </a>
   </div>
 
-  <div>
+  <div *ngIf="enableEdit">
     <div>
-      <a class="circle-link bottom" style="right: 20px" title="add" (click)="startAdding()">
-        <i class="fa fa-plus"></i>
-      </a>
-    </div>
-    <div>
-      <a class="circle-link bottom" style="right: 80px" title="delete" (click)="startDeleting()">
-        <i class="fa fa-trash"></i>
-      </a>
+      <div>
+        <a class="circle-link bottom" style="right: 20px" title="add" (click)="startAdding()">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+      <div>
+        <a class="circle-link bottom" style="right: 80px" title="delete" (click)="startDeleting()">
+          <i class="fa fa-trash"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -80,4 +82,3 @@
 <div *ngIf="!irRemoteService.commands" style="color: white">
   Backend lijkt uit te staan.
 </div>
-

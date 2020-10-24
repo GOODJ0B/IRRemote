@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IrRemoteService} from '../services/ir-remote-service';
 import {Command, RfCommand} from '../reference/reference';
 import {RfRemoteService} from '../services/rf-remote-service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,17 @@ import {RfRemoteService} from '../services/rf-remote-service';
 export class AppComponent implements OnInit {
   public title = 'IR Remote';
   public deleting = false;
+  public enableEdit = false;
   public rowIndexes = [10, 15, 20, 25, 30, 35];
   public rfRowIndexes = [0, 5];
   public adding = false;
 
   constructor(public readonly irRemoteService: IrRemoteService,
-              public readonly rfRemoteService: RfRemoteService) {
+              public readonly rfRemoteService: RfRemoteService,
+              activatedRoute: ActivatedRoute) {
+    activatedRoute.queryParams.subscribe(paramMap => {
+      this.enableEdit = paramMap.edit !== undefined;
+    });
   }
 
   ngOnInit(): void {
