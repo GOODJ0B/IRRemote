@@ -36,4 +36,3 @@ sudo nano /etc/rc.local
  --> voeg 'sudo pigpiod' en 'sh /home/pi/IRRemote/run.sh &' toe voor exit 0
 
 evt: maak een static ip adres
-
