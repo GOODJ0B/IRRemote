@@ -31,12 +31,12 @@ export class RfRemoteService {
     location: 2,
     isVisible: true
   } as RfCommand, {
-    name: 'leeg',
-    icon: 'fa-light',
+    name: 'ster',
+    icon: 'star',
     isOn: true,
     index: 3,
     location: 3,
-    isVisible: false
+    isVisible: true
   } as RfCommand, {
     name: 'alles aan',
     icon: 'toggle-on',
@@ -66,12 +66,12 @@ export class RfRemoteService {
     location: 7,
     isVisible: true
   } as RfCommand, {
-    name: 'leeg',
-    icon: '',
+    name: 'ster',
+    icon: 'star',
     isOn: false,
     index: 3,
     location: 8,
-    isVisible: false
+    isVisible: true
   } as RfCommand, {
     name: 'alles uit',
     icon: 'toggle-off',
@@ -94,6 +94,7 @@ export class RfRemoteService {
       }
     }
 
+    // url = 'http://192.168.0.40';
     // add port number of backend
     this.url = url + ':' + this.port;
   }
@@ -103,19 +104,32 @@ export class RfRemoteService {
       return;
     }
     this.waitingForResponse = true;
+    command.isBusy = true;
 
     if (command.name === 'alles aan'){
       this.httpClient.put<string>(this.url + '/everythingOn', null)
-        .subscribe(() => this.waitingForResponse = false);
+        .subscribe(() => {
+          this.waitingForResponse = false;
+          command.isBusy = false;
+        });
     } else if (command.name === 'alles uit'){
       this.httpClient.put<string>(this.url + '/everythingOff', null)
-        .subscribe(() => this.waitingForResponse = false);
+        .subscribe(() => {
+          this.waitingForResponse = false;
+          command.isBusy = false;
+        });
     } else if (command.isOn) {
       this.httpClient.put<string>(this.url + '/send-rf-on/' + command.index, null)
-        .subscribe(() => this.waitingForResponse = false);
+        .subscribe(() => {
+          this.waitingForResponse = false;
+          command.isBusy = false;
+        });
     } else {
       this.httpClient.put<string>(this.url + '/send-rf-off/' + command.index, null)
-        .subscribe(() => this.waitingForResponse = false);
+        .subscribe(() => {
+          this.waitingForResponse = false;
+          command.isBusy = false;
+        });
     }
   }
 }

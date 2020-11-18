@@ -2,26 +2,31 @@
 
   <div *ngFor="let rowIndex of rfRowIndexes" class="row ml-2">
     <a class="circle-link"
+       [class.green]="irRemoteService.commands[rowIndex].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex].icon"></i>
     </a>
     <a class="circle-link"
+       [class.green]="irRemoteService.commands[rowIndex + 1].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 1].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 1])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 1].icon"></i>
     </a>
     <a class="circle-link"
+       [class.green]="irRemoteService.commands[rowIndex + 2].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 2].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 2])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 2].icon"></i>
     </a>
     <a class="circle-link"
+       [class.green]="irRemoteService.commands[rowIndex + 3].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 3].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 3])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 3].icon"></i>
     </a>
     <a class="circle-link"
+       [class.green]="irRemoteService.commands[rowIndex + 4].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 4].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 4])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 4].icon"></i>
@@ -29,31 +34,36 @@
   </div>
 
   <div *ngFor="let rowIndex of rowIndexes" class="row ml-2">
-    <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex].isAddAction"
+    <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex].isBusy"
+       [class.hide]="!adding && irRemoteService.commands[rowIndex].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex])">
       <i [class]="'fa ' + irRemoteService.commands[rowIndex].icon"
          [class.red]="deleting && !irRemoteService.commands[rowIndex].isAddAction"></i>
     </a>
-    <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex + 1].isAddAction"
+    <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 1].isBusy"
+       [class.hide]="!adding && irRemoteService.commands[rowIndex + 1].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 1].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 1])">
       <i [class]="'fa ' + irRemoteService.commands[rowIndex + 1].icon"
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 1].isAddAction"></i>
     </a>
-    <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex + 2].isAddAction"
+    <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 2].isBusy"
+       [class.hide]="!adding && irRemoteService.commands[rowIndex + 2].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 2].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 2])">
       <i [class]="'fa ' + irRemoteService.commands[rowIndex + 2].icon"
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 2].isAddAction"></i>
     </a>
-    <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex + 3].isAddAction"
+    <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 3].isBusy"
+       [class.hide]="!adding && irRemoteService.commands[rowIndex + 3].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 3].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 3])">
       <i [class]="'fa ' + irRemoteService.commands[rowIndex + 3].icon"
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 3].isAddAction"></i>
     </a>
-    <a class="circle-link" [class.hide]="!adding && irRemoteService.commands[rowIndex + 4].isAddAction"
+    <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 4].isBusy"
+       [class.hide]="!adding && irRemoteService.commands[rowIndex + 4].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 4].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 4])">
       <i [class]="'fa ' + irRemoteService.commands[rowIndex + 4].icon"

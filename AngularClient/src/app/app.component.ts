@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.irRemoteService.sendCommand(command.name);
+    this.irRemoteService.sendCommand(command);
   }
 
   public rfCommandClickedHandler(command: RfCommand): void {

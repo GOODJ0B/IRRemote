@@ -3,6 +3,7 @@ export interface Command {
   icon: string;
   location: number;
   isAddAction: boolean;
+  isBusy: boolean;
 }
 
 export interface RfCommand {
@@ -12,4 +13,5 @@ export interface RfCommand {
   index: number;
   isOn: boolean;
   isVisible: boolean;
+  isBusy: boolean;
 }

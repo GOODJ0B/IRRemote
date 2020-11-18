@@ -10,17 +10,19 @@ from command import Command
 
 rfRetries = 5
 
-rfCodesOn = [8373588,
-             8376660,
-             8377428,
-             8377620,
-             8377668]
+rfCodesOn = [8373588, # A
+             8376660, # B
+             8377428, # C
+             8377668, # E (Ja ja, dit had D moeten zijn. Maar dan moest ik helemaal zo'n ding open schroeven en daar had ik geen zin in dus ik het het zo opgelost. Sue me.
+             8377620  # D
+			 ]
 
-rfCodesOff = [8373585,
-              8376657,
-              8377425,
-              8377617,
-              8377665]
+rfCodesOff = [8373585, # A
+              8376657, # B
+              8377425, # C
+              8377617, # E (Ja ja, dit had D moeten zijn. Maar dan moest ik helemaal zo'n ding open schroeven en daar had ik geen zin in dus ik het het zo opgelost. Sue me.
+              8377665  # D
+			  ]
 
 rfGpioPort = 17
 
@@ -62,6 +64,8 @@ def everythingOn():
     print('=> sending everything on')
     sendRfCommand(rfCodesOn[0])
     sendRfCommand(rfCodesOn[1])
+    sendRfCommand(rfCodesOn[2])
+    sendRfCommand(rfCodesOn[3])
     return '{ "success":"true" }'
 
 

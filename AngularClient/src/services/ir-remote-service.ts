@@ -24,6 +24,7 @@ export class IrRemoteService {
       }
     }
 
+    // url = 'http://192.168.0.40';
     // add port number of backend
     this.url = url + ':' + this.port;
   }
@@ -33,8 +34,10 @@ export class IrRemoteService {
       .subscribe(this.updateCommands.bind(this));
   }
 
-  public sendCommand(command: string): void {
-    this.httpClient.put(this.url + '/send/' + command, null).subscribe();
+  public sendCommand(command: Command): void {
+    command.isBusy = true;
+    this.httpClient.put(this.url + '/send/' + command.name, null)
+      .subscribe(); // () => command.isBusy = false);
   }
 
   public addCommand(name: string, icon: string, location: number): void {
