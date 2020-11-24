@@ -1,32 +1,32 @@
 <div *ngIf="irRemoteService.commands && !irRemoteService.isReceiving">
 
   <div *ngFor="let rowIndex of rfRowIndexes" class="row ml-2">
-    <a class="circle-link"
-       [class.green]="irRemoteService.commands[rowIndex].isBusy"
+    <a class="circle-link no-animate"
+       [class.green]="rfRemoteService.commands[rowIndex].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex].icon"></i>
     </a>
-    <a class="circle-link"
-       [class.green]="irRemoteService.commands[rowIndex + 1].isBusy"
+    <a class="circle-link no-animate"
+       [class.green]="rfRemoteService.commands[rowIndex + 1].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 1].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 1])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 1].icon"></i>
     </a>
-    <a class="circle-link"
-       [class.green]="irRemoteService.commands[rowIndex + 2].isBusy"
+    <a class="circle-link no-animate"
+       [class.green]="rfRemoteService.commands[rowIndex + 2].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 2].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 2])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 2].icon"></i>
     </a>
-    <a class="circle-link"
-       [class.green]="irRemoteService.commands[rowIndex + 3].isBusy"
+    <a class="circle-link no-animate"
+       [class.green]="rfRemoteService.commands[rowIndex + 3].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 3].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 3])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 3].icon"></i>
     </a>
-    <a class="circle-link"
-       [class.green]="irRemoteService.commands[rowIndex + 4].isBusy"
+    <a class="circle-link no-animate"
+       [class.green]="rfRemoteService.commands[rowIndex + 4].isBusy"
        [class.hide]="!rfRemoteService.commands[rowIndex + 4].isVisible"
        (click)="rfCommandClickedHandler(rfRemoteService.commands[rowIndex + 4])">
       <i [class]="'fa fa-' + rfRemoteService.commands[rowIndex + 4].icon"></i>
@@ -35,6 +35,7 @@
 
   <div *ngFor="let rowIndex of rowIndexes" class="row ml-2">
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex].isBusy"
+       [class.no-animate]="!irRemoteService.commands[rowIndex].isBusy"isAddAction
        [class.hide]="!adding && irRemoteService.commands[rowIndex].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex])">
@@ -42,6 +43,7 @@
          [class.red]="deleting && !irRemoteService.commands[rowIndex].isAddAction"></i>
     </a>
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 1].isBusy"
+       [class.no-animate]="!irRemoteService.commands[rowIndex + 1].isAddAction"
        [class.hide]="!adding && irRemoteService.commands[rowIndex + 1].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 1].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 1])">
@@ -49,6 +51,7 @@
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 1].isAddAction"></i>
     </a>
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 2].isBusy"
+       [class.no-animate]="!irRemoteService.commands[rowIndex + 2].isAddAction"
        [class.hide]="!adding && irRemoteService.commands[rowIndex + 2].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 2].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 2])">
@@ -56,6 +59,7 @@
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 2].isAddAction"></i>
     </a>
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 3].isBusy"
+       [class.no-animate]="!irRemoteService.commands[rowIndex + 3].isAddAction"
        [class.hide]="!adding && irRemoteService.commands[rowIndex + 3].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 3].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 3])">
@@ -63,6 +67,7 @@
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 3].isAddAction"></i>
     </a>
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex + 4].isBusy"
+       [class.no-animate]="!irRemoteService.commands[rowIndex + 4].isAddAction"
        [class.hide]="!adding && irRemoteService.commands[rowIndex + 4].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex + 4].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex + 4])">
@@ -79,7 +84,7 @@
         </a>
       </div>
       <div>
-        <a class="circle-link bottom" style="right: 80px" title="delete" (click)="startDeleting()">
+        <a class="circle-link bottom" style="right: 120px" title="delete" (click)="startDeleting()">
           <i class="fa fa-trash"></i>
         </a>
       </div>

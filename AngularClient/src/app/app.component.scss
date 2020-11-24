@@ -18,9 +18,14 @@
   color: red;
 }
 
+.no-animate {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
 .green {
-  color: white;
-  background-color: green;
+  color: white !important;
+  background-color: green !important;
 }
 
 .circle-link {

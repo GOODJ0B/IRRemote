@@ -37,7 +37,7 @@ export class IrRemoteService {
   public sendCommand(command: Command): void {
     command.isBusy = true;
     this.httpClient.put(this.url + '/send/' + command.name, null)
-      .subscribe(); // () => command.isBusy = false);
+      .subscribe(() => command.isBusy = false);
   }
 
   public addCommand(name: string, icon: string, location: number): void {
