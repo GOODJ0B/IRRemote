@@ -1,5 +1,4 @@
 <div *ngIf="irRemoteService.commands && !irRemoteService.isReceiving">
-
   <div *ngFor="let rowIndex of rfRowIndexes" class="row ml-2">
     <a class="circle-link no-animate"
        [class.green]="rfRemoteService.commands[rowIndex].isBusy"
@@ -35,7 +34,7 @@
 
   <div *ngFor="let rowIndex of rowIndexes" class="row ml-2">
     <a class="circle-link" [class.green]="irRemoteService.commands[rowIndex].isBusy"
-       [class.no-animate]="!irRemoteService.commands[rowIndex].isBusy"isAddAction
+       [class.no-animate]="!irRemoteService.commands[rowIndex].isBusy" isAddAction
        [class.hide]="!adding && irRemoteService.commands[rowIndex].isAddAction"
        [class.adding]="adding && irRemoteService.commands[rowIndex].isAddAction"
        (click)="commandClickedHandler(irRemoteService.commands[rowIndex])">
@@ -74,6 +73,64 @@
       <i [class]="'fa ' + irRemoteService.commands[rowIndex + 4].icon"
          [class.red]="deleting && !irRemoteService.commands[rowIndex + 4].isAddAction"></i>
     </a>
+  </div>
+
+  <div *ngIf="tcpRemoteService.connected">
+    <div *ngFor="let rowIndex of tcpRowIndexes" class="row ml-2">
+      <a class="circle-link no-animate"
+         [class.hide]="!tcpRemoteService.commands[rowIndex].isVisible"
+         (click)="tcpCommandClickedHandler(tcpRemoteService.commands[rowIndex])">
+        <img *ngIf="tcpRemoteService.commands[rowIndex].image" class="logo"
+             [src]="tcpRemoteService.commands[rowIndex].image">
+        <i *ngIf="!tcpRemoteService.commands[rowIndex].image"
+           [class]="'fa ' + tcpRemoteService.commands[rowIndex].icon"></i>
+      </a>
+      <a class="circle-link no-animate"
+         [class.hide]="!tcpRemoteService.commands[rowIndex + 1].isVisible"
+         (click)="tcpCommandClickedHandler(tcpRemoteService.commands[rowIndex + 1])">
+        <img *ngIf="tcpRemoteService.commands[rowIndex + 1].image" class="logo"
+             [src]="tcpRemoteService.commands[rowIndex + 1].image">
+        <i *ngIf="!tcpRemoteService.commands[rowIndex + 1].image"
+           [class]="'fa ' + tcpRemoteService.commands[rowIndex + 1].icon"></i>
+      </a>
+      <a class="circle-link no-animate"
+         [class.hide]="!tcpRemoteService.commands[rowIndex + 2].isVisible"
+         (click)="tcpCommandClickedHandler(tcpRemoteService.commands[rowIndex + 2])">
+        <img *ngIf="tcpRemoteService.commands[rowIndex + 2].image" class="logo"
+             [src]="tcpRemoteService.commands[rowIndex + 2].image">
+        <i *ngIf="!tcpRemoteService.commands[rowIndex + 2].image"
+           [class]="'fa ' + tcpRemoteService.commands[rowIndex + 2].icon"></i>
+      </a>
+      <a class="circle-link no-animate"
+         [class.hide]="!tcpRemoteService.commands[rowIndex + 3].isVisible"
+         (click)="tcpCommandClickedHandler(tcpRemoteService.commands[rowIndex + 3])">
+        <img *ngIf="tcpRemoteService.commands[rowIndex + 3].image" class="logo"
+             [src]="tcpRemoteService.commands[rowIndex + 3].image">
+        <i *ngIf="!tcpRemoteService.commands[rowIndex + 3].image"
+           [class]="'fa ' + tcpRemoteService.commands[rowIndex + 3].icon"></i>
+      </a>
+      <a class="circle-link no-animate"
+         [class.hide]="!tcpRemoteService.commands[rowIndex + 4].isVisible"
+         (click)="tcpCommandClickedHandler(tcpRemoteService.commands[rowIndex + 4])">
+        <img *ngIf="tcpRemoteService.commands[rowIndex + 4].image" class="logo"
+             [src]="tcpRemoteService.commands[rowIndex + 4].image">
+        <i *ngIf="!tcpRemoteService.commands[rowIndex + 4].image"
+           [class]="'fa ' + tcpRemoteService.commands[rowIndex + 4].icon"></i>
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="!tcpRemoteService.connected">
+    <div class="row ml-2">
+      <a class="circle-link no-animate hide"></a>
+      <a class="circle-link no-animate hide"></a>
+      <a class="circle-link no-animate hide"></a>
+      <a class="circle-link no-animate hide"></a>
+      <a class="circle-link no-animate"
+         (click)="tvOn()">
+        <i [class]="'fa fa-power-off'"></i>
+      </a>
+    </div>
   </div>
 
   <div *ngIf="enableEdit">

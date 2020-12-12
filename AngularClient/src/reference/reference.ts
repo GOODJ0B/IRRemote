@@ -1,3 +1,5 @@
+import KEYS from "./keys";
+
 export interface Command {
   name: string;
   icon: string;
@@ -14,4 +16,14 @@ export interface RfCommand {
   isOn: boolean;
   isVisible: boolean;
   isBusy: boolean;
+}
+
+export interface TcpCommand {
+  name: string;
+  icon: string;
+  location: number;
+  isVisible: boolean;
+  key: KEYS;
+  image: string;
+  customHandling: () => void;
 }

@@ -1,0 +1,28 @@
+export interface App {
+  appId: string
+  app_type: number
+  icon: string
+  is_lock: number
+  name: string
+}
+
+export interface SamsungCommand {
+  method: string
+  params: {
+    Cmd?: string
+    DataOfCmd?: string
+    Option?: string
+    TypeOfRemote?: string
+    data?: string | object
+    event?: string
+    to?: string
+  }
+}
+
+export interface WSData {
+  event?: string
+  data?: {
+    token?: string
+    data?: App[]
+  }
+}
